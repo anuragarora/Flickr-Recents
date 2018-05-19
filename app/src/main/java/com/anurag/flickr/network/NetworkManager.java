@@ -1,6 +1,5 @@
 package com.anurag.flickr.network;
 
-import com.anurag.flickr.model.GetRecentPhotosResponse;
 import com.anurag.flickr.model.server.ServerGetRecentPhotosSuccessResponse;
 
 import retrofit2.Callback;
@@ -10,7 +9,7 @@ import retrofit2.Callback;
  */
 public interface NetworkManager {
 
-    void getRecentPhotos(int page, Callback<GetRecentPhotosResponse> callback);
+    void getRecentPhotos(int page, Callback<ServerGetRecentPhotosSuccessResponse> callback);
 
     /*void getRecentPhotos(final String lat, final String lon, Callback<WeatherResponse> callback);
 

@@ -2,14 +2,12 @@ package com.anurag.flickr.network;
 
 import android.content.res.Resources;
 
-import com.anurag.flickr.model.GetRecentPhotosResponse;
 import com.anurag.flickr.model.server.ServerGetRecentPhotosSuccessResponse;
 
 import okhttp3.OkHttpClient;
 import retrofit2.Callback;
 import retrofit2.Converter;
 import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  *  Implementation class of NetworkManager interface via RetrofitNetworkManager
@@ -49,56 +47,13 @@ public class RetrofitNetworkManager implements NetworkManager {
     }
 
     @Override
-    public void getRecentPhotos(int page, Callback<GetRecentPhotosResponse> callback) {
+    public void getRecentPhotos(int page, Callback<ServerGetRecentPhotosSuccessResponse> callback) {
         getAdapter()
-                .addConverterFactory(mRecentPhotosConverter)
+                //.addConverterFactory(mRecentPhotosConverter)
                 .addConverterFactory(mGsonConverter)
                 .build()
                 .create(ApiService.class)
                 .getRecentPhotos(GET_RECENT_PHOTOS_QUERY_METHOD, String.valueOf(page))
                 .enqueue(callback);
     }
-
-    /*@Override
-    public void getWeatherByGeoData(String lat, String lon, Callback<WeatherResponse> callback) {
-        getAdapter()
-                .addConverterFactory(mGsonConverter)
-                .build()
-                .create(ApiService.class)
-                .getWeatherByGeoData(lat, lon, "1", mResources.getString(R.string.weather_open_weather_map_appid))
-                .enqueue(callback);
-    }
-
-    @Override
-    public void getWeatherByCityName(String fullCityName, Callback<WeatherResponse> callback) {
-        Logger.i(TAG, "Reached retrofit network manager cityName");
-        getAdapter()
-                .addConverterFactory(mGsonConverter)
-                .build()
-                .create(ApiService.class)
-                .getWeatherByCityName(mResources.getString(R.string.weather_open_weather_map_appid), fullCityName)
-                .enqueue(callback);
-    }
-
-    @Override
-    public void getWeatherForecastByCityName(String fullCityName, Callback<WeatherForecastResponse> callback) {
-        getAdapter()
-                .addConverterFactory(mGsonConverter)
-                .build()
-                .create(ApiService.class)
-                .get16DayWeatherForcastByCityName(mResources.getString(R.string.weather_open_weather_map_appid),
-                        fullCityName, "16")
-                .enqueue(callback);
-    }
-
-    @Override
-    public void getWeatherForecastByGeoData(String lat, String lon, Callback<WeatherForecastResponse> callback) {
-        getAdapter()
-                .addConverterFactory(mGsonConverter)
-                .build()
-                .create(ApiService.class)
-                .get16DayWeatherForecastByGeoData(lat, lon, "16",
-                        mResources.getString(R.string.weather_open_weather_map_appid))
-                .enqueue(callback);
-    }*/
 }

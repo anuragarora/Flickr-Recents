@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import com.anurag.flickr.R;
 import com.anurag.flickr.image.ImageLoader;
-import com.anurag.flickr.model.server.ServerPhoto;
+import com.anurag.flickr.model.Photo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,28 +25,29 @@ import butterknife.ButterKnife;
 public class PhotoAdapter extends BaseAdapter {
     private final LayoutInflater mLayoutInflator;
     private final ImageLoader mImageLoader;
-    private final List<ServerPhoto> mServerPhotoList = new ArrayList<>();
+    private final List<Photo> mPhotoList = new ArrayList<>();
 
     public PhotoAdapter(Context context, ImageLoader imageLoader) {
         mLayoutInflator = LayoutInflater.from(context);
         mImageLoader = imageLoader;
     }
 
-    public void setList(List<ServerPhoto> list) {
-        mServerPhotoList.clear();
-        mServerPhotoList.addAll(list);
+    public void addToList(List<Photo> list) {
+        mPhotoList.addAll(list);
+    }
 
-        notifyDataSetChanged();
+    public void clearList() {
+        mPhotoList.clear();
     }
 
     @Override
     public int getCount() {
-        return mServerPhotoList.size();
+        return mPhotoList.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return mServerPhotoList.get(position);
+        return mPhotoList.get(position);
     }
 
     @Override
@@ -56,7 +57,7 @@ public class PhotoAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View view, ViewGroup parent) {
-        final ServerPhoto serverPhoto = ((ServerPhoto) getItem(position));
+        final Photo photo = ((Photo) getItem(position));
         ViewHolder holder;
         if (view == null) {
             view = mLayoutInflator
@@ -68,10 +69,13 @@ public class PhotoAdapter extends BaseAdapter {
         }
 
         // Setting image
-        //mImageLoader.loadImage();
+        mImageLoader.loadImage(photo.getUrl(),
+                R.drawable.photo_placeholder,
+                R.drawable.photo_placeholder,
+                true, holder.mImage);
 
         // Setting Title
-        holder.mTitle.setText(serverPhoto.getTitle());
+        holder.mTitle.setText(photo.getTitle());
 
         return view;
     }
