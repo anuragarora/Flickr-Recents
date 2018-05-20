@@ -3,6 +3,6 @@
     android:id="@+id/view_photo_list_footer_button"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:text="@string/copy_view_photo_list_footer">
+    android:text="@string/view_photo_list_footer_copy">
 
 </Button>
