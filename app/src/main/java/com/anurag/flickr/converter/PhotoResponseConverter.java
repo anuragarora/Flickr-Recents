@@ -25,7 +25,7 @@ import retrofit2.Retrofit;
  * Converter to convert server Recent ServerPhoto model to client Recent ServerPhoto model
  * which is as per app requirements.
  *
- * TODO: Converter is not working as in Retrofit 1.9, Retrofit 2.0 beta3. Need to look into changes
+ * TODO: Converter is not working as in Retrofit 1.9, Retrofit 2.0 beta3. Need to look into changes!
  */
 public class PhotoResponseConverter extends Converter.Factory {
     private static final String TAG = PhotoResponseConverter.class.getSimpleName();
@@ -41,7 +41,7 @@ public class PhotoResponseConverter extends Converter.Factory {
     public Converter<ResponseBody, ?> responseBodyConverter(Type type,
                                                             Annotation[] annotations,
                                                             Retrofit retrofit) {
-        if(type != GetRecentPhotosResponse.class) {
+        if (type != GetRecentPhotosResponse.class) {
             Logger.i(TAG, "Type: " + type);
             return mOriginalConverter.responseBodyConverter(type, annotations, retrofit);
         } else {

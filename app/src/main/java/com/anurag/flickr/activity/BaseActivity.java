@@ -64,11 +64,11 @@ public class BaseActivity extends AppCompatActivity {
     }
 
     /**
-     * I have mFirstConnect and mFirstDisconnect booleans to protect the app code when the system
+     * I have created mFirstConnect and mFirstDisconnect booleans to protect the app code when the system
      * broadcasts send these events multiple times for a single going online/offline incident.
-     *
+     * <p>
      * CAUTION: A connect/disconnect event will always be sent to the activity the first time this
-     * receiver is registered (onStart currently)
+     * receiver is registered (onCreate currently)
      */
     private BroadcastReceiver receiver = new BroadcastReceiver() {
 

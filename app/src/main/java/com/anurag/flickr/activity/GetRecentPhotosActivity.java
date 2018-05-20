@@ -8,7 +8,6 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.ListView;
 import android.widget.ProgressBar;
-import android.widget.Spinner;
 
 import com.anurag.flickr.R;
 import com.anurag.flickr.adapter.PhotoAdapter;
@@ -18,14 +17,18 @@ import com.anurag.flickr.event.photo.GetRecentPhotosSuccessResponseEvent;
 import com.anurag.flickr.image.ImageLoader;
 import com.anurag.flickr.loader.GetPhotoLoader;
 import com.anurag.flickr.model.GetRecentPhotosResponse;
+import com.anurag.flickr.util.Logger;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 import static com.anurag.flickr.module.ApplicationModule.applicationContext;
-import static com.anurag.flickr.module.LoaderModule.getPhotosFetcher;
 import static com.anurag.flickr.module.ImageLoaderModule.picassoImageLoader;
+import static com.anurag.flickr.module.LoaderModule.getPhotosFetcher;
 
+/**
+ * Activity showing a list view of Recent Flickr Pics (upto a 1000 pics) from API
+ */
 public class GetRecentPhotosActivity extends BaseActivity {
     private static final String TAG = GetRecentPhotosActivity.class.getSimpleName();
 
@@ -41,8 +44,10 @@ public class GetRecentPhotosActivity extends BaseActivity {
     private View mFooterView;
     private int mCurrentPage = 0;
 
-    private Snackbar mSnackbar;
+    // Making Snackbar public to facilitate testing via robolectric, TODO: investigate shadowing!
+    public Snackbar mSnackbar;
     private PhotoAdapter mAdapter;
+
     private final GetPhotoLoader mPhotoFetcher;
     private final ImageLoader mImageLoader;
 
@@ -67,7 +72,7 @@ public class GetRecentPhotosActivity extends BaseActivity {
         // Initializing required components
         ButterKnife.bind(this);
         mLoadingIndicator.setVisibility(View.VISIBLE);
-        mSnackbar = Snackbar.make(mCoordinator, "Network connection unavailable",
+        mSnackbar = Snackbar.make(mCoordinator, R.string.activity_network_unavailable_copy,
                 Snackbar.LENGTH_INDEFINITE);
         mAdapter = new PhotoAdapter(this, mImageLoader);
         mFooterView = LayoutInflater.from(applicationContext())
@@ -81,16 +86,14 @@ public class GetRecentPhotosActivity extends BaseActivity {
 
         // Making get photos network call
         mPhotoFetcher.getRecentPhotos(mCurrentPage);
-
-
     }
 
     public void onEvent(NetworkStatusChangedEvent event) {
         if (event.isNetworkEnabled()) {
-            if(mSnackbar.isShown())
+            if (mSnackbar.isShown())
                 mSnackbar.dismiss();
 
-            //TODO: Perform additional action when network connection is back.
+            // Perform additional action when network connection is back here
         } else {
             mSnackbar.setAction("Dismiss", new View.OnClickListener() {
                 @Override
@@ -102,14 +105,19 @@ public class GetRecentPhotosActivity extends BaseActivity {
         }
     }
 
+    /**
+     * Invoked when GetRecentPhotos network call succeeds
+     *
+     * @param event Success Event object
+     */
     public void onEvent(GetRecentPhotosSuccessResponseEvent event) {
         final GetRecentPhotosResponse response = event.getResponse();
         // Initializing footerView for loading more items onClick
         // Also check if response is same as last response which was persisted
 
-        if(event.isNetworkResponse()) {
+        if (event.isNetworkResponse()) {
             mCurrentPage = response.getPage();
-            if(mCurrentPage == 1) {
+            if (mCurrentPage == 1) {
                 mAdapter.clearList();
                 mListView.addFooterView(mFooterView);
             }
@@ -122,14 +130,19 @@ public class GetRecentPhotosActivity extends BaseActivity {
         mAdapter.addToList(response.getPhotoList());
         mAdapter.notifyDataSetChanged();
 
-        if(mListView.getAdapter() == null) {
-            //mListView.setDivider();
+        if (mListView.getAdapter() == null) {
             mListView.setAdapter(mAdapter);
             mLoadingIndicator.setVisibility(View.GONE);
         }
     }
 
-    public void onEvent(GetRecentPhotosFailureEvent failureMessage) {
-        Snackbar.make(mCoordinator, failureMessage.getMessage(), Snackbar.LENGTH_SHORT);
+    /**
+     * Invoked when GetRecentPhotos network call fails
+     *
+     * @param event Failure Event object
+     */
+    public void onEvent(GetRecentPhotosFailureEvent event) {
+        Logger.i(TAG, "Inside failure event: " + event.getMessage());
+        Snackbar.make(mCoordinator, event.getMessage(), Snackbar.LENGTH_SHORT).show();
     }
 }

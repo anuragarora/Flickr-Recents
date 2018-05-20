@@ -66,3 +66,6 @@ fastlane/readme.md
 
 # Mac
 .DS_Store
+
+# Android Studio
+.idea/*

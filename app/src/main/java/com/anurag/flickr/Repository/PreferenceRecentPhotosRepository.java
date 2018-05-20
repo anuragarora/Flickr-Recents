@@ -9,7 +9,7 @@ import static com.anurag.flickr.Repository.FlickrPreferences.PREF_RECENT_PHOTOS_
 public class PreferenceRecentPhotosRepository implements RecentPhotosRepository {
     private final FlickrPreferences mPreferences;
 
-    public PreferenceRecentPhotosRepository(FlickrPreferences pampersPreferences){
+    public PreferenceRecentPhotosRepository(FlickrPreferences pampersPreferences) {
         mPreferences = pampersPreferences;
     }
 

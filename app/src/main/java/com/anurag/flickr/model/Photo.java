@@ -1,7 +1,7 @@
 package com.anurag.flickr.model;
 
 /**
- * Created by anurag on 18/05/18.
+ * Client class for Photo object
  */
 
 public class Photo {

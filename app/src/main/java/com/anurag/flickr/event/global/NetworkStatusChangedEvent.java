@@ -1,5 +1,8 @@
 package com.anurag.flickr.event.global;
 
+/**
+ * NetworkStatusChange(connected, disconnected) event class
+ */
 public class NetworkStatusChangedEvent {
     private boolean mNetworkEnabled;
 

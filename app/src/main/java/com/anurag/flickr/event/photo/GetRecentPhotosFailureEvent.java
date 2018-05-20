@@ -1,7 +1,7 @@
 package com.anurag.flickr.event.photo;
 
 /**
- * Created by anurag on 18/05/18.
+ * GetRecentPhotos api failure event class
  */
 
 public class GetRecentPhotosFailureEvent {

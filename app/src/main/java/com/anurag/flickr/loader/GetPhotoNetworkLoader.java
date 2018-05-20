@@ -4,6 +4,7 @@ import android.content.res.Resources;
 
 import com.anurag.flickr.R;
 import com.anurag.flickr.Repository.RecentPhotosRepository;
+import com.anurag.flickr.event.photo.GetRecentPhotosFailureEvent;
 import com.anurag.flickr.event.photo.GetRecentPhotosSuccessResponseEvent;
 import com.anurag.flickr.model.GetRecentPhotosResponse;
 import com.anurag.flickr.model.Photo;
@@ -23,7 +24,7 @@ import retrofit2.Response;
 
 /**
  * Loader for GetPhotoNetworkLoader
- * TODO Need to wrap Callback to accept a Success and a failure response.
+ * TODO Need to wrap Callback to accept a Success and a failure response and facilitate testing.
  * TODO: Send a failure response with Failure object and message from server on failure response.
  */
 public class GetPhotoNetworkLoader implements GetPhotoLoader, Callback<ServerGetRecentPhotosSuccessResponse> {
@@ -45,10 +46,10 @@ public class GetPhotoNetworkLoader implements GetPhotoLoader, Callback<ServerGet
 
     @Override
     public void getRecentPhotos(int page) {
-        if(page == 0) {
+        if (page == 0) {
             GetRecentPhotosResponse lastResponse = new Gson().fromJson(mRecentPhotosRepository
-                            .getRecentPhotosLastResponse(), GetRecentPhotosResponse.class);
-            if(lastResponse != null) {
+                    .getRecentPhotosLastResponse(), GetRecentPhotosResponse.class);
+            if (lastResponse != null) {
                 mEventBus.post(new GetRecentPhotosSuccessResponseEvent(lastResponse, false));
             }
 
@@ -70,7 +71,7 @@ public class GetPhotoNetworkLoader implements GetPhotoLoader, Callback<ServerGet
              */
             GetRecentPhotosResponse photosResponse = convertToClientResponse(response.body());
             mRecentPhotosRepository.saveRecentPhotosLastResponse(new Gson()
-                            .toJson(photosResponse, GetRecentPhotosResponse.class));
+                    .toJson(photosResponse, GetRecentPhotosResponse.class));
 
             // Posting event to activity for display
             mEventBus.post(new GetRecentPhotosSuccessResponseEvent(photosResponse,
@@ -82,7 +83,7 @@ public class GetPhotoNetworkLoader implements GetPhotoLoader, Callback<ServerGet
 
     @Override
     public void onFailure(Call<ServerGetRecentPhotosSuccessResponse> call, Throwable t) {
-        mEventBus.post("message: " + t.getMessage());
+        mEventBus.post(new GetRecentPhotosFailureEvent(t.getMessage()));
         Logger.i(GetPhotoNetworkLoader.class.getSimpleName(), "Failure Response: " + t.getMessage());
     }
 

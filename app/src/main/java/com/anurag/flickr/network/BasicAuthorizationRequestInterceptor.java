@@ -11,6 +11,9 @@ import okhttp3.Interceptor;
 import okhttp3.Request;
 import okhttp3.Response;
 
+/**
+ * Okhttp3 interceptor to add params common to every call for flickr api for my app!
+ */
 public class BasicAuthorizationRequestInterceptor implements Interceptor {
     private static final String PARAM_AUTHORIZATION = "api_key";
     private static final String PARAM_RESPONSE_FORMAT = "format";

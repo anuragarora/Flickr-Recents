@@ -33,14 +33,34 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
 
     // View injections
-    compile 'com.jakewharton:butterknife:8.8.1'
+    implementation 'com.jakewharton:butterknife:8.8.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
 
     // Communications and object passing via an application wide bus
     // LocalBroadcastManager or any implementation of publisher subscriber pattern can be used instead.
-    compile 'de.greenrobot:eventbus:2.4.0'
+    implementation 'de.greenrobot:eventbus:2.4.0'
 
     // Image downloading and caching library
     implementation 'com.squareup.picasso:picasso:2.5.2'
-    compile 'com.jakewharton.picasso:picasso2-okhttp3-downloader:1.1.0'
+    implementation 'com.jakewharton.picasso:picasso2-okhttp3-downloader:1.1.0'
+
+    // ------------------------- //
+    // Testing support libraries //
+    // ------------------------- //
+
+    // Testing Android lifecycle events
+    testImplementation "org.robolectric:robolectric:3.7.1"
+    android {
+        testOptions {
+            unitTests {
+                includeAndroidResources = true
+                returnDefaultValues = true
+            }
+        }
+    }
+    // Mocking dependencies
+    testImplementation "org.mockito:mockito-core:2.15.0"
+
+    // Unit testing
+    testImplementation 'junit:junit:4.12'
 }

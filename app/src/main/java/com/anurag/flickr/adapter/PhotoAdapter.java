@@ -19,7 +19,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
- * PhotoAdapter
+ * PhotoAdapter for Flickr Recents List View
  */
 
 public class PhotoAdapter extends BaseAdapter {

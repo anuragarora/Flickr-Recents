@@ -2,6 +2,9 @@ package com.anurag.flickr.model;
 
 import java.util.List;
 
+/**
+ * GetRecentPhotos client response which is passed to the presentation layer.
+ */
 public class GetRecentPhotosResponse {
     private final int mPage;
     private final int mPages;

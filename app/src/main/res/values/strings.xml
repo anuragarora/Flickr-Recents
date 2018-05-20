@@ -9,5 +9,6 @@
     <string name="api_image_url">https://farm%s.staticflickr.com/%s/%s_%s_b.jpg</string>
 
     <string name="copy_view_photo_list_footer">Load More</string>
+    <string name="activity_network_unavailable_copy">Network connection unavailable</string>
 
 </resources>

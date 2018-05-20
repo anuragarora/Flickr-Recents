@@ -14,7 +14,6 @@ import static com.anurag.flickr.module.ApplicationModule.resources;
 import static com.anurag.flickr.module.ConverterModule.gsonConverter;
 import static com.anurag.flickr.module.ConverterModule.recentPhotosConverter;
 
-
 /**
  * Network Manager Module
  */

@@ -17,7 +17,7 @@ public class Logger {
 
     public static void i(String tag, String message) {
         if (sIsDebug) {
-            if(!TextUtils.isEmpty(message)){
+            if (!TextUtils.isEmpty(message)) {
                 Log.i(tag, message);
             }
         }
@@ -25,7 +25,7 @@ public class Logger {
 
     public static void d(String tag, String message) {
         if (sIsDebug) {
-            if(!TextUtils.isEmpty(message)){
+            if (!TextUtils.isEmpty(message)) {
                 Log.d(tag, message);
             }
         }
@@ -33,7 +33,7 @@ public class Logger {
 
     public static void w(String tag, String message) {
         if (sIsDebug) {
-            if(!TextUtils.isEmpty(message)){
+            if (!TextUtils.isEmpty(message)) {
                 Log.w(tag, message);
             }
         }
@@ -41,7 +41,7 @@ public class Logger {
 
     public static void w(String tag, String message, Throwable t) {
         if (sIsDebug) {
-            if(!TextUtils.isEmpty(message)){
+            if (!TextUtils.isEmpty(message)) {
                 Log.w(tag, message, t);
             }
         }
@@ -49,7 +49,7 @@ public class Logger {
 
     public static void e(String tag, String message) {
         if (sIsDebug) {
-            if(!TextUtils.isEmpty(message)){
+            if (!TextUtils.isEmpty(message)) {
                 Log.e(tag, message);
             }
         }
@@ -57,7 +57,7 @@ public class Logger {
 
     public static void e(String tag, String message, Throwable t) {
         if (sIsDebug) {
-            if(!TextUtils.isEmpty(message)){
+            if (!TextUtils.isEmpty(message)) {
                 Log.e(tag, message, t);
             }
         }

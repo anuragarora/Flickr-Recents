@@ -10,7 +10,7 @@ import retrofit2.Converter;
 import retrofit2.Retrofit;
 
 /**
- *  Implementation class of NetworkManager interface via RetrofitNetworkManager
+ * Implementation class of NetworkManager interface via RetrofitNetworkManager
  */
 public class RetrofitNetworkManager implements NetworkManager {
     private static final String TAG = RetrofitNetworkManager.class.getSimpleName();

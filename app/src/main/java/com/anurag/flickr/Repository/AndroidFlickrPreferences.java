@@ -77,9 +77,9 @@ public class AndroidFlickrPreferences implements FlickrPreferences {
 
     @Override
     public void clearAllExceptSpecified(String fileName, List<String> prefsNotToBeDeleted) {
-        if(prefsNotToBeDeleted==null){
-           getSharedPreferences(fileName).edit().clear().apply();
-        }else{
+        if (prefsNotToBeDeleted == null) {
+            getSharedPreferences(fileName).edit().clear().apply();
+        } else {
             SharedPreferences preferences = getSharedPreferences(fileName);
             Map<String, ?> keys = preferences.getAll();
             for (Map.Entry<String, ?> entry : keys.entrySet()) {

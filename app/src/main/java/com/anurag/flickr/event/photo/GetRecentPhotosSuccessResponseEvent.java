@@ -3,7 +3,8 @@ package com.anurag.flickr.event.photo;
 import com.anurag.flickr.model.GetRecentPhotosResponse;
 
 /**
- * GetRecentPhotos Success response
+ * /**
+ * GetRecentPhotos api success event class
  */
 
 public class GetRecentPhotosSuccessResponseEvent {
@@ -19,6 +20,7 @@ public class GetRecentPhotosSuccessResponseEvent {
     public GetRecentPhotosResponse getResponse() {
         return mSuccessResponse;
     }
+
     public boolean isNetworkResponse() {
         return isNetworkResponse;
     }

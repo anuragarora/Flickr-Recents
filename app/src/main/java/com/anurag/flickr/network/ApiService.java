@@ -10,8 +10,7 @@ import retrofit2.http.Query;
  * Endpoints for the REST web services
  */
 public interface ApiService {
-
     @GET("/services/rest")
     Call<ServerGetRecentPhotosSuccessResponse> getRecentPhotos(@Query("method") String method,
-                                                  @Query("page") String page);
+                                                               @Query("page") String page);
 }

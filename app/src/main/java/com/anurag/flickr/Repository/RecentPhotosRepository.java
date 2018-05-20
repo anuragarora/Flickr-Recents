@@ -5,6 +5,8 @@ package com.anurag.flickr.Repository;
  */
 public interface RecentPhotosRepository {
     String getRecentPhotosLastResponse();
+
     void saveRecentPhotosLastResponse(String value);
+
     void clearAll();
 }

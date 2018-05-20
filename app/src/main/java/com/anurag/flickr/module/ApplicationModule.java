@@ -6,7 +6,7 @@ import android.content.res.Resources;
 import android.support.v4.content.LocalBroadcastManager;
 
 /**
- * Application module facilitates access to app wide services and object by any class.
+ * Application module facilitates access to app wide services and objects by any class.
  */
 public class ApplicationModule {
     private static Application sApplication;
@@ -23,7 +23,7 @@ public class ApplicationModule {
         return sApplication.getResources();
     }
 
-    public static LocalBroadcastManager getBroadcastManager(){
+    public static LocalBroadcastManager getBroadcastManager() {
         return LocalBroadcastManager.getInstance(applicationContext());
     }
 }
